@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FieldGame.MainPage"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:viewmodel="clr-namespace:FieldGame.ViewModel"
+             x:DataType="viewmodel:PinViewModel"
+             xmlns:Model ="clr-namespace:FieldGame.Model">
+    <Grid >
+        <Map x:Name="map"
+                  IsShowingUser="True"
+                  ItemsSource="{Binding Locations}">
+            <x:Arguments>
+                <MapSpan>
+                    <x:Arguments>
+                        <sensors:Location>
+                            <x:Arguments>
+                                <x:Double>36.9628066</x:Double>
+                                <x:Double>-122.0194722</x:Double>
+                            </x:Arguments>
+                        </sensors:Location>
+                        <x:Double>0.01</x:Double>
+                        <x:Double>0.01</x:Double>
+                    </x:Arguments>
+                </MapSpan>
+            </x:Arguments>
+            <Map.ItemTemplate>
+
+                <DataTemplate x:DataType="viewmodel:MapLocation">
+
+                    <Pin Location="{Binding Position}"
+                              Address="{Binding Address}"
+                              Label="{Binding Question}"
+                              MarkerClicked="Pin_MarkerClicked"/>
+                    
+                </DataTemplate>
+                
+            </Map.ItemTemplate>
+        </Map>
+    </Grid>
+    
+</ContentPage>
